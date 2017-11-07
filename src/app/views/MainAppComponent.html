@@ -2,10 +2,24 @@
 <h2>My favourite hero is <input [(ngModel)]="myHero.name" placeholder="name"></h2>
 
 <p>Heroes:</p>
-<ul>
-    <li *ngFor="let hero of heroes">
-        {{hero.name}}
+<ul class="heroes">
+    <li *ngFor="let hero of heroes" 
+        (click)="onSelect(hero)" 
+        [class.selected]="hero === selectedHero">
+        
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
     </li>
 
     <p *ngIf="heroes.length > 3">There are many heroes!</p>
 </ul>
+
+<div *ngIf="selectedHero">
+    <h2>{{selectedHero.name}} details!</h2>
+    <div>
+        <label>id: </label> {{selectedHero.id}}
+    </div>
+    <div>
+        <label>name:</label>
+        <input [(ngModel)]="selectedHero.name" placeholder="name"/>
+    </div>
+</div>
